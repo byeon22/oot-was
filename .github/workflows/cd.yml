@@ -56,7 +56,7 @@ jobs:
       - name: docker build and push
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t oot-was .
+          docker build -t minjeongs/oot-was:latest .
           docker push minjeongs/oot-was:latest
 
       # 5. SSH ACTION을 통한 Run-Command (Docker 이미지 pull 후 docker-compose를 통한 실행)
