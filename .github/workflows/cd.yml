@@ -43,15 +43,23 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      
+      # 3. Spring 환경 변수 설정
+      - name: Set up application.yml
+        run: |
+          cd ./src/main/resources
+          touch ./application.yml
+          echo "${{ secrets.APPLICATION }}" > ./application.yml
+        shell: bash
 
-      # 3. Docker 이미지 build 및 push
+      # 4. Docker 이미지 build 및 push
       - name: docker build and push
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -t oot-was .
           docker push minjeongs/oot-was:latest
 
-      # 4. SSH ACTION을 통한 Run-Command (Docker 이미지 pull 후 docker-compose를 통한 실행)
+      # 5. SSH ACTION을 통한 Run-Command (Docker 이미지 pull 후 docker-compose를 통한 실행)
       - name: deploy
         uses: appleboy/ssh-action@v0.1.5
         with:
