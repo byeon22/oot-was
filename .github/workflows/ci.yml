@@ -70,4 +70,4 @@ jobs:
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -t oot-was .
           docker tag oot-was:latest minjeongs/oot-was:latest
-          docker push repl4242/oot-was:latest
+          docker push minjeongs/oot-was:latest
