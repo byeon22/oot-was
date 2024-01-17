@@ -44,6 +44,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      # 3. Docker 이미지 build 및 push
+      - name: docker build and push
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker build -t oot-was .
+          docker tag oot-was:latest minjeongs/oot-was:latest
+          docker push minjeongs/oot-was:latest
+
       # 4. SSH ACTION을 통한 Run-Command (Docker 이미지 pull 후 docker-compose를 통한 실행)
       - name: deploy
         uses: appleboy/ssh-action@v0.1.5

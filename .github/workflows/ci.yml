@@ -64,10 +64,4 @@ jobs:
         with:
           arguments: build
 
-      # 6. Docker 이미지 build 및 push
-      - name: docker build and push
-        run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -t oot-was .
-          docker tag oot-was:latest minjeongs/oot-was:latest
-          docker push minjeongs/oot-was:latest
+
